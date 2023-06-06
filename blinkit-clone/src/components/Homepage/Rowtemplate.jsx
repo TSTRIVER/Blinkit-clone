@@ -62,7 +62,7 @@ const Rowtemplate = () => {
                     <h1
                       style={{
                         marginBottom: "0.3vw",
-                        fontSize: "2.4vw",
+                        fontSize: "1.8vw",
                         marginLeft: "1.5vw",
                         marginTop: "1vw",
                       }}
@@ -70,13 +70,14 @@ const Rowtemplate = () => {
                       {x > 1040 ? ele.name : ele.alt}
                     </h1>
                     {x > 1040 ? (
-                      <NavLink to="/products"
+                      <NavLink
+                        to="/products"
                         style={{
                           color: "green",
                           cursor: "pointer",
                           marginRight: "1vw",
                           fontSize: "1.2vw",
-                          textDecoration: "none"
+                          textDecoration: "none",
                         }}
                       >
                         See all
@@ -108,13 +109,14 @@ const Rowtemplate = () => {
                         {x > 1040 ? ele.name : ele.alt}
                       </h1>
                       {x > 1040 ? (
-                        <NavLink to="/products"
+                        <NavLink
+                          to="/products"
                           style={{
                             color: "green",
                             cursor: "pointer",
                             marginRight: "1vw",
                             fontSize: "1.2vw",
-                            textDecoration: "none"
+                            textDecoration: "none",
                           }}
                         >
                           See all
@@ -133,7 +135,10 @@ const Rowtemplate = () => {
                           ></iframe>
                         </div>
                         <div className="v1">
-                           <img src = "https://cdn.grabon.in/gograbon/images/merchant/1660048686470.jpg" style={{width: "100%",height: "100%"}}/>
+                          <img
+                            src="https://cdn.grabon.in/gograbon/images/merchant/1660048686470.jpg"
+                            style={{ width: "100%", height: "100%" }}
+                          />
                         </div>
                       </div>
                     ) : (

@@ -1,0 +1,140 @@
+.overlay-address {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 9998;
+}
+.popup-address {
+  height: 100vh;
+  position: fixed;
+  width: 50vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+#my-address {
+  font-family: "Poppins", "sans-serif";
+  font-weight: bold;
+  font-size: large;
+  height: 5%;
+  width: 100%;
+  background-color: violet;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 2vw;
+}
+.back-btn {
+  display: block;
+  position: absolute;
+  top: 4vh;
+  left: 2vw;
+  background: none;
+  border: none;
+  font-size: large;
+  font-weight: bold;
+  cursor: pointer;
+}
+#add-address {
+  width: 100%;
+  height: 10%;
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1vw;
+  font-weight: bolder;
+  border-bottom: 1px inset gray;
+}
+#add-karo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3vw;
+}
+#add-address2 {
+  width: 100%;
+  height: 8%;
+  background-color: rgba(128, 128, 128, 0.4);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: larger;
+  font-weight: bolder;
+  border-bottom: 1px inset gray;
+}
+#address-cont {
+  width: 100%;
+  height: 70%;
+  overflow-y: auto;
+  background-color: rgb(80, 112, 173);
+}
+#done {
+  width: 100%;
+  height: 10%;
+  background-color: rgba(5, 118, 30, 0.975);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5vw;
+  cursor: pointer;
+  color: white;
+}
+.address-cards {
+  width: 100%;
+  height: 20%;
+  background-color: rgb(104, 169, 33);
+  border-bottom: 1px inset gray;
+}
+.address-header{
+   width: 100%;
+   height: 30%;
+   background-color: rgb(123, 180, 180);
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   padding-left: 1vw;
+}
+.circle-check{
+  width: 25px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.incircle-check{
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  background-color: slategray;
+}
+.incircle-uncheck{
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  background-color: white;
+}
+.address-details{
+  margin-bottom: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: large;
+  padding-bottom: 2vh;
+}
+button{
+  border: none;
+  background: none;
+  cursor: pointer;
+}

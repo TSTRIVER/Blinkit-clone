@@ -8,29 +8,75 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "../LoginSignup/myform.css";
 import RegLogin from "./RegLogin";
+import AddMark from "../Cart/AddMark";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { get_time } from "../../Store/cart_slice";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [currLocation, setCurrLocation] = useState({});
+  const { isAuthenticated } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   let hrs = new Date().getHours();
   let min = 10,
-    max = 45;
+    max = 30;
   let [rand, setRand] = useState(0);
 
   useEffect(() => {
+    setRand(Math.floor(Math.random() * (max - min)) + min);
     getLocation();
   }, []);
 
+  useEffect(()=>{
+     dispatch(get_time(rand));
+  },[dispatch,rand])
+
   const getLocation = async () => {
-    setRand(Math.floor(Math.random() * (max - min)) + min);
     const location = await axios.get("https://ipapi.co/json");
     setCurrLocation(location.data);
   };
 
+  const accessCart = () => {
+    if (isAuthenticated) {
+      navigate('/cart', { replace: true });
+      window.location.reload();
+    }
+    else{
+      toast.error("Please Login/Signup First", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
       <div className="navbar_cont">
         <div className="logo_cont">
           <img
@@ -76,7 +122,8 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faCircleUser} className="face-icon" />
           <div id="my-cart">
             <FontAwesomeIcon icon={faCartShopping} className="cart-icon" />
-            <button>Cart</button>
+            <AddMark />
+            <button onClick={() => accessCart()}>Cart</button>
           </div>
           <FontAwesomeIcon icon={faCartShopping} className="mycart-icon" />
         </div>

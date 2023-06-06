@@ -22,12 +22,6 @@ const RegLogin = () => {
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("user_token");
     isLoggedIn ? setLogstate("Logout") : setLogstate("Login");
-
-    const item = localStorage.getItem("user_info");
-    if (item) {
-      const user_info = JSON.parse(item);
-      dispatch(login_success(item));
-    }
   }, []);
 
   const handleSubmit1 = async (e) => {

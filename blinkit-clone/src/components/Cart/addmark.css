@@ -1,0 +1,24 @@
+#cart-circle{
+    width: 1.5vw;
+    height:2vh;
+    background-image: linear-gradient(180deg,yellow
+    ,red);
+    border-radius: 100%;
+    position: fixed;
+    top: 2vh;
+    right: 10vw;
+    color: black;
+    cursor: pointer;
+    transition: 1s;
+    font-size: medium;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#cart-circle > p{
+    padding-right: 1vw;
+}
+#cart-circle:hover{
+    width: 20px;
+    height: 20px;
+}

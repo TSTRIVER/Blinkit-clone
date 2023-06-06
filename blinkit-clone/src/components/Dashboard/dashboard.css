@@ -1,0 +1,29 @@
+#outer-circle{
+    position: fixed;
+    border-radius: 100%;
+    top: 80vh;
+    right: 2vw;
+    width: 85px;
+    z-index: 10000;
+    height: 85px;
+    background-image: linear-gradient(90deg,yellow,green);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#inner-circle{
+    width: 70px;
+    height: 70px;
+    background-color: rgba(135, 207, 235, 0.671);
+    border-radius: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.kit-icon{
+    font-size: xx-large;
+    color: rgb(13, 13, 66);
+}

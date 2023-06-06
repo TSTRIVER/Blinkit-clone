@@ -1,0 +1,29 @@
+.datagrid {
+  margin-top: 10rem;
+height: 60vh; /* Adjust this value as per your requirement */
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.even-row {
+  background-color: #f9f9f9;
+}
+
+.odd-row {
+  background-color: rgba(0, 0, 0, 0.05);
+}
