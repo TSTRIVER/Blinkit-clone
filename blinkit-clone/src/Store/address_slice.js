@@ -3,12 +3,18 @@ import axios from "axios";
 
 const addressSlice = createSlice({
     name: "address",
-    initialState: {addresses: []},
+    initialState: {addresses: [],curr_address:{}},
     reducers: {
         get_addresses: (state,action) => {
             return{
                 ...state,
                 addresses: action.payload
+            }
+        },
+        get_selected_address: (state,action) => {
+            return{
+                ...state,
+                curr_address: action.payload
             }
         }
     }
@@ -42,5 +48,5 @@ export const updateAddress = (selected_ind,userid,setas,receiver,flat,street) =>
      }
 }
 
-export const {get_addresses} = addressSlice.actions;
+export const {get_addresses,get_selected_address} = addressSlice.actions;
 export default addressSlice.reducer;

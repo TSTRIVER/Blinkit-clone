@@ -3,7 +3,7 @@ import axios from "axios";
 
 const user_slice = createSlice({
   name: "user",
-  initialState: { user: {}, isAuthenticated: false},
+  initialState: { user: {}, isAuthenticated: false, all_users:[]},
   reducers: {
     login_success: (state, action) => {
       return {
@@ -25,6 +25,12 @@ const user_slice = createSlice({
              isAuthenticated: false,
              user: null
         }
+    },
+    fetch_users: (state,action) => {
+          return{
+            ...state,
+             all_users: action.payload
+          }
     }
   },
 });
@@ -61,10 +67,20 @@ export const login = (number,password) =>async(dispatch)=>{
        }
  }
 
+ export const fetchUsers = () => async(dispatch) => {
+     try{
+        const {data} = await axios.get("/api/v1/fetchUsers");
+        dispatch(fetch_users(data.all_users))
+     }
+     catch(error){
+      console.log(error);
+     }
+ }
+
  export const saveToken = (token,user_data) => {
      localStorage.setItem("user_token",token);
      localStorage.setItem("user_info",JSON.stringify(user_data));
  }
 
-export const { login_success,logout_success,register_success} = user_slice.actions;
+export const { login_success,logout_success,register_success,fetch_users} = user_slice.actions;
 export default user_slice.reducer;

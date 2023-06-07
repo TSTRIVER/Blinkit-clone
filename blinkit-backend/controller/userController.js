@@ -40,3 +40,12 @@ export const logoutUser = async (req, res, next) => {
     message: "Logged Out",
   });
 };
+
+export const fetchUsers = async(req,res,next) => {
+   const all_users = await User.find();
+
+   res.status(201).json({
+      success:true,
+      all_users
+   })
+}

@@ -10,9 +10,11 @@ import { focus_product } from "../../Store/product_slice";
 import { deleteProduct } from "../../Store/product_slice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Datagrid = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [popOpen, setPopOpen] = useState(false);
   let [activeBtn3, setActiveBtn3] = useState(true);
   let [activeBtn4, setActiveBtn4] = useState(false);
@@ -31,6 +33,7 @@ const Datagrid = () => {
   };
 
   const { products } = useSelector((state) => state.product);
+  const { user } = useSelector((state) => state.user);
 
   const editHandle = (index) => {
     setPopOpen(true);
@@ -91,7 +94,8 @@ const Datagrid = () => {
                 <td>{ele.price}</td>
                 <td>{ele.quantity}</td>
                 <td>
-                  <button onClick={()=>deleteHandle(index)}
+                  <button
+                    onClick={() => deleteHandle(index)}
                     style={{
                       marginRight: "1vw",
                       color: "red",
@@ -119,6 +123,13 @@ const Datagrid = () => {
       </div>
       <button className="submitButton" onClick={() => setPopOpen(true)}>
         Add/Edit Product
+      </button>
+      <button
+        className="submitButton"
+        style={{ float: "right", marginRight: "10vw" }}
+        onClick={() => navigate(`/dashboard/users/${user._id}`)}
+      >
+        Manage Orders
       </button>
       {popOpen && (
         <div className="overlay">
