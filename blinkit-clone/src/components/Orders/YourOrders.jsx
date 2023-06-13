@@ -29,19 +29,7 @@ const YourOrders = () => {
 
   return (
     <>
-      <h1
-        style={{
-          margin: "auto",
-          width: "100%",
-          height: "5vh",
-          top: "12vh",
-          position: "fixed",
-          textAlign: "center",
-          color: "yellowgreen",
-        }}
-      >
-        {user_name}'s Orders
-      </h1>
+      <h1 className="order-h1">{user_name}'s Orders</h1>
       <div className="datagrid">
         <table>
           <thead>

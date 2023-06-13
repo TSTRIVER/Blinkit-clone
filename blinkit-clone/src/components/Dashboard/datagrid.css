@@ -1,7 +1,8 @@
 .datagrid {
   margin-top: 10rem;
-height: 60vh; /* Adjust this value as per your requirement */
+  height: 60vh;
   overflow-y: auto;
+  overflow-x: auto;
 }
 
 table {
@@ -26,4 +27,21 @@ th {
 
 .odd-row {
   background-color: rgba(0, 0, 0, 0.05);
+}
+.order-h1 {
+  margin: auto;
+  width: 100%;
+  height: 5vh;
+  top: 12vh;
+  position: fixed;
+  text-align: center;
+  color: yellowgreen;
+}
+@media (max-width: 1040px) {
+  .datagrid {
+    margin-top: 12rem;
+  }
+  .order-h1{
+    top: 20vh;
+  }
 }

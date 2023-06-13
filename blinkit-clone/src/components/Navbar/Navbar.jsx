@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationPinLock } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -34,9 +33,9 @@ const Navbar = () => {
     getLocation();
   }, []);
 
-  useEffect(()=>{
-     dispatch(get_time(rand));
-  },[dispatch,rand])
+  useEffect(() => {
+    dispatch(get_time(rand));
+  }, [dispatch, rand]);
 
   const getLocation = async () => {
     const location = await axios.get("https://ipapi.co/json");
@@ -45,10 +44,9 @@ const Navbar = () => {
 
   const accessCart = () => {
     if (isAuthenticated) {
-      navigate('/cart', { replace: true });
+      navigate("/cart", { replace: true });
       window.location.reload();
-    }
-    else{
+    } else {
       toast.error("Please Login/Signup First", {
         position: "top-right",
         autoClose: 5000,
@@ -61,6 +59,8 @@ const Navbar = () => {
       });
     }
   };
+
+  let x = window.innerWidth;
 
   return (
     <>
@@ -118,14 +118,13 @@ const Navbar = () => {
               name="search"
             />
           </div>
-          <RegLogin />
-          <FontAwesomeIcon icon={faCircleUser} className="face-icon" />
+          <RegLogin/>
           <div id="my-cart">
             <FontAwesomeIcon icon={faCartShopping} className="cart-icon" />
             <AddMark />
             <button onClick={() => accessCart()}>Cart</button>
           </div>
-          <FontAwesomeIcon icon={faCartShopping} className="mycart-icon" />
+         {x <= 1040 ? <button onClick={() => accessCart()} className="carter-btn"><FontAwesomeIcon icon={faCartShopping} className="mycart-icon" /></button> : ""}
         </div>
         <div id="search-box2">
           <div id="blank2">

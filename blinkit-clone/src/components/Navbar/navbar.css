@@ -1,251 +1,290 @@
-.navbar_cont{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 10vh;
-    background-color: aquamarine;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.navbar_cont {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 10vh;
+  /* background-color: aquamarine; */
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.logo{
-    height: 6vh;
-    margin-top: 2vh;
-    margin-left: 3vh;
+.logo {
+  height: 6vh;
+  margin-top: 2vh;
+  margin-left: 3vh;
 }
-.links_cont{
-    width: 80%;
-    height: 10vh;
-    background-color: yellowgreen;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+.links_cont {
+  width: 80%;
+  height: 10vh;
+  /* background-color: yellowgreen; */
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.links_cont > #location{
-    height: 7vh;
-    background-color: royalblue;
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.links_cont > #location {
+  height: 7vh;
+  /* background-color: royalblue; */
+  background-color: white;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
-#location > .div1{
-    font-weight: 900;
-    font-size: 1.2vw;
+#location > .div1 {
+  font-weight: 900;
+  font-size: 1.2vw;
 }
-#location > .div2{
-    font-weight: 500;
-    font-size: 0.9vw;
+#location > .div2 {
+  font-weight: 500;
+  font-size: 0.9vw;
 }
-.links_cont > #search-box{
-    height: 7vh;
-    background-color: royalblue;
-    width: 40%;
+.links_cont > #search-box {
+  height: 7vh;
+  /* background-color: royalblue; */
+  background-color: white;
+  width: 40%;
 }
-.links_cont > #login-out{
-    height: 7vh;
-    background-color: royalblue;
-    width: 10%;
+.links_cont > #login-out {
+  height: 7vh;
+  /* background-color: royalblue; */
+  width: 10%;
 }
-.links_cont > #my-cart{
-    height: 7vh;
-    background-color: royalblue;
-    width: 15%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    position: relative;
+.links_cont > #my-cart {
+  height: 7vh;
+  /* background-color: royalblue; */
+  background-color: white;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
 }
-.close_icon{
-    animation: shake 2s infinite;
+.close_icon {
+  animation: shake 2s infinite;
 }
-@keyframes shake{
-   0%{transform: rotate(0deg)}
-   25%{transform: rotate(10deg)}
-   50%{transform: rotate(0deg)}
-   75%{transform: rotate(-10deg)}
-   100%{transform: rotate(0deg)}
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 /* search box css */
-#search-box{
+#search-box {
+  display: flex;
+  flex-direction: row;
+}
+.inputer {
+  display: block;
+  width: 90%;
+  height: 100%;
+  border-right: 2px inset gray;
+  border-top: 2px solid gray;
+  border-bottom: 2px inset gray;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  font-family: "Poppins", "sans-serif";
+  font-size: medium;
+  border-left: none;
+}
+.inputer::placeholder {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  opacity: 1;
+}
+.inputer:focus {
+  outline: none;
+}
+#blank {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  height: 100%;
+  background-color: white;
+  border-left: 2px solid gray;
+  border-top: 2px solid gray;
+  border-bottom: 2px inset gray;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-right: none;
+}
+/*login and cart css*/
+#login-out > button,
+#my-cart > button {
+  width: 100%;
+  height: 100%;
+  font-family: "Poppins", "sans-serif";
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  background-color: rgb(25, 169, 25);
+  color: azure;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-weight: lighter;
+  font-size: large;
+}
+.face-icon {
+  display: none;
+}
+#my-cart > div {
+  padding-left: 1.3vw;
+}
+.cart-icon {
+  position: absolute;
+  margin-top: auto;
+  margin-bottom: auto;
+  left: 1.5vw;
+  color: white;
+  font-size: large;
+}
+.mycart-icon {
+  display: none;
+}
+#search-box2 {
+  display: none;
+}
+.btn-login {
+  display: none;
+}
+/*-----------RESPONSIVENESS-------------*/
+@media (max-width: 1040px) {
+  .logo_cont {
+    display: none;
+  }
+  #blank,
+  #search-box,
+  #search-box > input {
+    display: none;
+  }
+  .navbar_cont {
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .links_cont {
+    height: 50%;
+    width: 100%;
+    position: relative;
+    align-items: center;
+  }
+  .face-icon {
+    display: block;
+  }
+  .links_cont > #location {
+    position: absolute;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    /* background-color: chocolate; */
+  }
+  #location > .div1 {
+    font-size: large;
+  }
+  #location > .div2 {
+    font-size: medium;
+  }
+  .links_cont > .face-icon {
+    position: absolute;
+    right: 2vw;
+    font-size: xx-large;
+    color: rgb(40, 56, 39);
+  }
+  .links_cont > #login-out {
+    display: none;
+  }
+  .links_cont > #my-cart {
+    display: none;
+  }
+  .links_cont > .mycart-icon {
+    display: block;
+    position: absolute;
+    right: 5vw;
+    font-size: xx-large;
+    color: rgb(26, 88, 22);
+  }
+  #search-box2 {
     display: flex;
     flex-direction: row;
-}
-.inputer{
+    width: 100%;
+    height: 50%;
+    background-color: orchid;
+  }
+  #blank2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: 100%;
+    background-color: white;
+    border-left: 1px inset rgba(122, 122, 122, 0.4);
+    border-bottom: 1px inset rgba(122, 122, 122, 0.4);
+  }
+  .inputer2 {
     display: block;
     width: 90%;
     height: 100%;
-    border: none;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    font-family: 'Poppins','sans-serif';
+    border-right: 1px inset rgba(122, 122, 122, 0.4);
+    border-bottom: 1px inset rgba(122, 122, 122, 0.4);
+    border-top: 1px inset rgba(122, 122, 122, 0.4);
+    border-left: none;
+    font-family: "Poppins", "sans-serif";
     font-size: medium;
-}
-.inputer::placeholder { 
-    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  }
+  .inputer2::placeholder {
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
     opacity: 1;
-}
-.inputer:focus{
+  }
+  .inputer2:focus,
+  #blank2:focus {
     outline: none;
     border: 0;
+  }
+  .btn-login {
+    display: block;
+  }
+  .mycart-icon {
+    display: block;
+    color: green;
+  }
+  .carter-btn{
+    display: block;
+    font-size: xx-large;
+    float: right;
+  }
 }
-#blank{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 10%;
-    height: 100%;
-    background-color: white;
-    border: none;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+@media (max-width: 813px) {
+  #location > .div1 {
+    font-size: medium;
+  }
+  #location > .div2 {
+    font-size: small;
+  }
 }
-/*login and cart css*/
-#login-out > button, #my-cart > button{
-    width: 100%;
-    height: 100%;
-    font-family: 'Poppins','sans-serif';
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    background-color: rgb(25, 169, 25);
-    color: azure;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-weight: lighter;
-    font-size: large;
+@media (max-width: 675px) {
+  .links_cont > .mycart-icon {
+    right: 3vw;
+  }
 }
-.face-icon{
-    display: none;
-}
-#my-cart > div{
-    padding-left: 1.3vw;
-}
-.cart-icon{
-    position: absolute;
-    margin-top: auto;
-    margin-bottom: auto;
-    left:1.5vw;
-    color: white;
-    font-size: large;
-}
-.mycart-icon{
-    display: none;
-}
-#search-box2{
-    display: none;
-}
-/*-----------RESPONSIVENESS-------------*/
-@media (max-width: 1040px){
-    .logo_cont{
-        display: none;
-    }
-    #blank, #search-box , #search-box > input{
-        display: none;
-    }
-    .navbar_cont{
-        height: 20vh;
-        display: flex;
-        flex-direction: column;
-    }
-    .links_cont{
-        height: 50%;
-        width: 100%;
-        position: relative;
-        align-items: center;
-    }
-    .face-icon{
-        display: block;
-    }
-    .links_cont > #location{
-        position: absolute;
-        left: 0;
-        width: 40%;
-        height: 100%;
-        background-color: chocolate;
-    }
-    #location > .div1{
-        font-size: large;
-    }
-    #location > .div2{
-        font-size: medium;
-    }
-    .links_cont > .face-icon{
-        position: absolute;
-        right: 2vw;
-        font-size: xx-large;
-        color: rgb(40, 56, 39);
-    }
-    .links_cont > #login-out{
-        display: none;
-    }
-    .links_cont > #my-cart{
-        display: none;
-    }
-    .links_cont > .mycart-icon{
-        display: block;
-        position: absolute;
-        right: 10vw;
-        font-size: xx-large;
-        color: rgb(26, 88, 22);
-    }
-    #search-box2{
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        height: 50%;
-        background-color: orchid;
-    }
-    #blank2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 10%;
-    height: 100%;
-    background-color: white;
-    border-left: 1px inset rgba(122, 122, 122,0.4);
-    border-bottom: 1px inset rgba(122, 122, 122,0.4);
-    }
-    .inputer2{
-        display: block;
-        width: 90%;
-        height: 100%;
-        border-right: 1px inset rgba(122, 122, 122,0.4);
-        border-bottom: 1px inset rgba(122, 122, 122,0.4);
-        border-top: 1px inset rgba(122, 122, 122,0.4);
-        border-left: none;
-        font-family: 'Poppins','sans-serif';
-        font-size: medium;
-    }
-    .inputer2::placeholder { 
-        font-family: 'Poppins', Arial, Helvetica, sans-serif;
-        opacity: 1;
-    }
-    .inputer2:focus,#blank2:focus{
-        outline: none;
-        border: 0;
-    }
-}
-@media (max-width: 813px){
-    #location > .div1{
-        font-size: medium;
-    }
-    #location > .div2{
-        font-size: small;
-    }
-}
-@media (max-width: 675px){
-    .links_cont > .mycart-icon{
-        right: 15vw;
-}
-}
-@media (max-width: 461px){
-    #location > .div1{
-        font-size: small;
-    }
-    #location > .div2{
-        font-size: x-small;
-    }
+@media (max-width: 461px) {
+  #location > .div1 {
+    font-size: small;
+  }
+  #location > .div2 {
+    font-size: x-small;
+  }
 }

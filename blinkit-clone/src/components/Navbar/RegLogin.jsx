@@ -8,6 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login, logout, register, login_success } from "../../Store/user_slice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
 const RegLogin = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -162,7 +164,13 @@ const RegLogin = () => {
         ) : (
           <button onClick={() => setIsPopupOpen(true)}>{logstate}</button>
         )}
-        {isPopupOpen && (
+      </div>
+      {logstate === "Logout" ? (
+          <button className="btn-login" onClick={() => logoutHandle()} style={{fontSize:"xx-large",marginRight:"1vw"}}><FontAwesomeIcon icon={faCircleUser} className="face-icon" /></button>
+        ) : (
+          <button className="btn-login" onClick={() => setIsPopupOpen(true)} style={{fontSize:"xx-large",marginRight:"1vw"}}><FontAwesomeIcon icon={faCircleUser} className="face-icon" /></button>
+        )}
+         {isPopupOpen && (
           <div className="overlay">
             <div className="popup">
               <button
@@ -271,7 +279,6 @@ const RegLogin = () => {
             </div>
           </div>
         )}
-      </div>
     </>
   );
 };

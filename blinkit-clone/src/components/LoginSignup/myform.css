@@ -121,3 +121,9 @@
 .btn-active{
    background-image: linear-gradient(180deg,yellow,green);
 }
+@media (max-width: 1040px){
+  .popup{
+    height: 70vh;
+    width: 70vw;
+  }
+}
