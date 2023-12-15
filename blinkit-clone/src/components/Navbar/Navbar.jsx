@@ -15,11 +15,10 @@ import AddMark from "../Cart/AddMark";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { get_time } from "../../Store/cart_slice";
-import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [currLocation, setCurrLocation] = useState({});
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state?.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -38,8 +37,12 @@ const Navbar = () => {
   }, [dispatch, rand]);
 
   const getLocation = async () => {
-    const location = await axios.get("https://ipapi.co/json");
-    setCurrLocation(location.data);
+    try {
+      const location = await axios.get("https://ipapi.co/json");
+      setCurrLocation(location?.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const accessCart = () => {
@@ -82,6 +85,7 @@ const Navbar = () => {
           <img
             src="https://thelogofinder.com/wp-content/uploads/2022/08/Blinkit.svg"
             className="logo"
+            alt="blinkit-logo"
           ></img>
         </div>
         <div className="links_cont">
@@ -100,7 +104,8 @@ const Navbar = () => {
               )}
             </div>
             <div className="div2">
-              {currLocation.city}, {currLocation.region}, {currLocation.country}
+              {currLocation?.city}, {currLocation?.region},{" "}
+              {currLocation?.country_name}
             </div>
             <FontAwesomeIcon icon="fa-solid fa-lock" />
           </div>
@@ -118,13 +123,21 @@ const Navbar = () => {
               name="search"
             />
           </div>
-          <RegLogin/>
-          <div id="my-cart">
-            <FontAwesomeIcon icon={faCartShopping} className="cart-icon" />
-            <AddMark />
-            <button onClick={() => accessCart()}>Cart</button>
-          </div>
-         {x <= 1040 ? <button onClick={() => accessCart()} className="carter-btn"><FontAwesomeIcon icon={faCartShopping} className="mycart-icon" /></button> : ""}
+          <RegLogin />
+          {user && user?.role !== "Admin" && (
+            <div id="my-cart">
+              <FontAwesomeIcon icon={faCartShopping} className="cart-icon" />
+              <AddMark />
+              <button onClick={() => accessCart()}>Cart</button>
+            </div>
+          )}
+          {x <= 1040 ? (
+            <button onClick={() => accessCart()} className="carter-btn">
+              <FontAwesomeIcon icon={faCartShopping} className="mycart-icon" />
+            </button>
+          ) : (
+            ""
+          )}
         </div>
         <div id="search-box2">
           <div id="blank2">

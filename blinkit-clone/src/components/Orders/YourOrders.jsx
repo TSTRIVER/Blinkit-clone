@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,8 +6,8 @@ import { useLocation } from "react-router-dom";
 import { updateStatus } from "../../Store/orders_slice";
 
 const YourOrders = () => {
-  let { user } = useSelector((state) => state.user);
-  let { orders } = useSelector((state) => state.order);
+  let { user } = useSelector((state) => state?.user);
+  let { orders } = useSelector((state) => state?.order);
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -18,7 +18,6 @@ const YourOrders = () => {
   const [status, setStatus] = useState("");
   const [pop, setPop] = useState(false);
   const [order_id, setOrder_id] = useState("");
-  const [colorStatus, setColorStatus] = useState(1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,22 +44,22 @@ const YourOrders = () => {
           <tbody>
             {orders.map((ele, index) => (
               <tr className={index % 2 === 0 ? "even-row" : "odd-row"}>
-                <td style={{ overflowX: "auto" }}>{ele.razorpay_order_id}</td>
+                <td style={{ overflowX: "auto" }}>{ele?.razorpay_order_id}</td>
                 <td>{ele.created_at}</td>
                 <td>₹{ele.amount_paid / 100}</td>
-                <td style={{ overflowX: "auto" }}>{ele.deliver_to.flat}</td>
+                <td style={{ overflowX: "auto" }}>{ele?.deliver_to?.flat}</td>
 
                 {ele.status === "Placed" && (
-                  <td style={{ color: "gray" }}>{ele.status}</td>
+                  <td style={{ color: "gray" }}>{ele?.status}</td>
                 )}
                 {ele.status === "Dispatched" && (
-                  <td style={{ color: "orange" }}>{ele.status}</td>
+                  <td style={{ color: "orange" }}>{ele?.status}</td>
                 )}
                 {ele.status === "Shipped" && (
-                  <td style={{ color: "yellowgreen" }}>{ele.status}</td>
+                  <td style={{ color: "yellowgreen" }}>{ele?.status}</td>
                 )}
                 {ele.status === "Delivered" && (
-                  <td style={{ color: "darkgreen" }}>{ele.status}</td>
+                  <td style={{ color: "darkgreen" }}>{ele?.status}</td>
                 )}
 
                 {user.role === "Admin" && (
@@ -73,7 +72,7 @@ const YourOrders = () => {
                       }}
                       onClick={() => {
                         setPop(true);
-                        setOrder_id(ele.razorpay_order_id);
+                        setOrder_id(ele?.razorpay_order_id);
                       }}
                     >
                       <FontAwesomeIcon icon={faPen} />

@@ -6,18 +6,20 @@ import {
   faArrowLeftLong,
   faPlusCircle,
   faPencil,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import Add from "./Add";
 import Update from "./Update";
-import { useSelector , useDispatch} from "react-redux";
+import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Address = () => {
-  const address_arr = useSelector((state) => state.address.addresses.addresses);
+  const address_arr = useSelector(
+    (state) => state.address.addresses?.addresses
+  );
   let [deliver, setDeliver] = useState(address_arr);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     getLocation();
@@ -60,7 +62,7 @@ const Address = () => {
 
   return (
     <>
-     <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -147,10 +149,10 @@ const Address = () => {
               <p
                 style={{
                   fontSize: "0.9vw",
-                  color: "gray",
+                  color: "black",
                   marginTop: "auto",
                   marginBottom: "auto",
-                  fontWeight: "lighter",
+                  fontWeight: "bold",
                   marginLeft: "1vw",
                 }}
               >
@@ -158,73 +160,89 @@ const Address = () => {
               </p>
             </div>
             <div id="address-cont">
-              {deliver.map((ele, ind) => (
-                <div className="address-cards">
-                  <div className="address-header">
-                    <button className="circle-check">
+              {deliver ? (
+                deliver.map((ele, ind) => (
+                  <div className="address-cards">
+                    <div className="address-header">
+                      <button className="circle-check">
+                        <button
+                          className={
+                            ind === isSelected
+                              ? "incircle-check"
+                              : "incircle-uncheck"
+                          }
+                          onClick={() => {
+                            setIsSelected(ind);
+                            localStorage.setItem(
+                              "curr_address",
+                              JSON.stringify(deliver[ind])
+                            );
+                          }}
+                        ></button>
+                      </button>
+                      <h3 style={{ marginLeft: "2vw" }}>{ele.set_as}</h3>
                       <button
-                        className={
-                          ind === isSelected
-                            ? "incircle-check"
-                            : "incircle-uncheck"
-                        }
-                        onClick={() => {
-                          setIsSelected(ind);
-                          localStorage.setItem("curr_address",JSON.stringify(deliver[ind]))
+                        style={{
+                          border: "none",
+                          background: "none",
+                          marginLeft: "10vw",
+                          cursor: "pointer",
                         }}
-                      ></button>
-                    </button>
-                    <h3 style={{ marginLeft: "2vw" }}>{ele.set_as}</h3>
-                    <button
-                      style={{
-                        border: "none",
-                        background: "none",
-                        marginLeft: "10vw",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        setAddressPop(false);
-                        setAddOpen(true);
-                        btn6handle();
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={faPencil}
-                        style={{ fontSize: "1vw" }}
-                      />
-                    </button>
+                        onClick={() => {
+                          setAddressPop(false);
+                          setAddOpen(true);
+                          btn6handle();
+                        }}
+                      >
+                        {isSelected > -1 ? (
+                          <>
+                            <FontAwesomeIcon
+                              icon={faPencil}
+                              style={{ fontSize: "1vw" }}
+                            />
+                            <FontAwesomeIcon
+                              icon={faTrash}
+                              style={{ fontSize: "1vw", marginLeft: "2em" }}
+                            />
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </button>
+                    </div>
+                    <div className="address-details">
+                      <p
+                        className="reciever"
+                        style={{ fontSize: "medium", marginLeft: "4.5vw" }}
+                      >
+                        {ele.receiver}
+                      </p>
+                      <p
+                        className="flat"
+                        style={{ fontSize: "medium", marginLeft: "4.5vw" }}
+                      >
+                        {ele.flat}
+                      </p>
+                      <p
+                        className="street"
+                        style={{ fontSize: "medium", marginLeft: "4.5vw" }}
+                      >
+                        {ele.street}
+                      </p>
+                    </div>
                   </div>
-                  <div className="address-details">
-                    <p
-                      className="reciever"
-                      style={{ fontSize: "medium", marginLeft: "4.5vw" }}
-                    >
-                      {ele.receiver}
-                    </p>
-                    <p
-                      className="flat"
-                      style={{ fontSize: "medium", marginLeft: "4.5vw" }}
-                    >
-                      {ele.flat}
-                    </p>
-                    <p
-                      className="street"
-                      style={{ fontSize: "medium", marginLeft: "4.5vw" }}
-                    >
-                      {ele.street}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <h1>You dont have any Addresses..Create One!</h1>
+              )}
             </div>
             <button
               id={isSelected > -1 ? "done" : "gray"}
               onClick={() => {
-                 if(isSelected > -1){
-                   navigate("/proceedToPay");
-                   window.location.reload();
-                 }
-                 else{
+                if (isSelected > -1) {
+                  navigate("/proceedToPay");
+                  window.location.reload();
+                } else {
                   toast.error("Please Select An Address !", {
                     position: "top-right",
                     autoClose: 5000,
@@ -235,7 +253,7 @@ const Address = () => {
                     progress: undefined,
                     theme: "light",
                   });
-                 }
+                }
               }}
             >
               <p>Done</p>

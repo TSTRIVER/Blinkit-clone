@@ -21,7 +21,6 @@ const user_slice = createSlice({
     },
     logout_success: (state) => {
         return {
-            ...state,
              isAuthenticated: false,
              user: null
         }

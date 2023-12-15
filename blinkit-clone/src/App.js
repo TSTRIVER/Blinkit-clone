@@ -22,7 +22,8 @@ import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user?.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   useEffect(() => {
     const item = localStorage.getItem("user_info");
@@ -32,35 +33,35 @@ const App = () => {
     }
 
     dispatch(getProducts());
-  }, [dispatch, isAuthenticated, user._id, user.role]);
+  }, [dispatch, isAuthenticated, user?._id, user?.role]);
 
   useEffect(() => {
-    if (isAuthenticated && user.role === "User") {
-      dispatch(getAddresses(user._id));
-      dispatch(fetchOrders(user._id));
+    if (isAuthenticated && user?.role === "User") {
+      dispatch(getAddresses(user?._id));
+      dispatch(fetchOrders(user?._id));
     }
-  }, [isAuthenticated, dispatch, user._id]);
+  }, [isAuthenticated, dispatch, user?._id]);
 
   useEffect(() => {
-    if (isAuthenticated && user.role === "Admin") {
+    if (isAuthenticated && user?.role === "Admin") {
       dispatch(fetchUsers());
     }
-  }, [isAuthenticated, user.role, dispatch]);
+  }, [isAuthenticated, user?.role, dispatch]);
 
   return (
     <>
       <Navbar />
-      {isAuthenticated && user.role === "Admin" ? <Dashboard /> : ""}
-      {isAuthenticated && user.role === "User" ? <Orders /> : ""}
+      {isAuthenticated && user?.role === "Admin" ? <Dashboard /> : ""}
+      {isAuthenticated && user?.role === "User" ? <Orders /> : ""}
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/products" element={<ProductMain />}></Route>
 
-        {isAuthenticated && user.role === "Admin" && (
+        {isAuthenticated && user?.role === "Admin" && (
           <Route path="/dashboard/:userId" element={<Datagrid />}></Route>
         )}
 
-        {isAuthenticated && user.role === "Admin" && (
+        {isAuthenticated && user?.role === "Admin" && (
           <Route path="/dashboard/users/:id" element={<ManageUser />}></Route>
         )}
 

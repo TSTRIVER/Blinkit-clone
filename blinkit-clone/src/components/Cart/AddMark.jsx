@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState} from "react";
 import "./addmark.css";
 import { useDispatch } from "react-redux";
 import { get_items } from "../../Store/cart_slice";
@@ -13,7 +13,7 @@ const AddMark = () => {
     let count = 0;
     if (item !== null) {
       let parse_item = JSON.parse(item);
-      for (let i = 0; i < parse_item.length; i++) {
+      for (let i = 0; i < parse_item?.length; i++) {
         if (parse_item[i] !== 0) {
           count++;
         }
@@ -27,7 +27,7 @@ const AddMark = () => {
       }
     }
     dispatch(get_items(count));
-  }, [dispatch,setCnt])
+  }, [dispatch, setCnt]);
 
   return (
     <>

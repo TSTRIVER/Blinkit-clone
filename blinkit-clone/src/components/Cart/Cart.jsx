@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./cart.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,9 +9,8 @@ import Empty from "./Empty";
 const Cart = () => {
   const [cartPop, setCartPop] = useState(true);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { time, items } = useSelector((state) => state.cart);
-  const { products } = useSelector((state) => state.product);
+  const { time, items } = useSelector((state) => state?.cart);
+  const { products } = useSelector((state) => state?.product);
 
   const [cart_arr, setCart_arr] = useState(Array.from({ length: 17 }, () => 0));
 
@@ -29,7 +28,7 @@ const Cart = () => {
 
       let cnt = 0;
       for (let i = 0; i < products.length; i++) {
-        cnt += products[i].price * cart_arr[i];
+        cnt += products[i]?.price * cart_arr[i];
       }
       setTotal(cnt);
     }
@@ -41,7 +40,7 @@ const Cart = () => {
   };
 
   const increment = (ind) => {
-    setTotal((prevTotal) => prevTotal + products[ind].price);
+    setTotal((prevTotal) => prevTotal + products[ind]?.price);
     setCart_arr((prevArr) => {
       const newArr = [...prevArr];
       newArr[ind] = newArr[ind] + 1;
@@ -51,7 +50,7 @@ const Cart = () => {
   };
   const decrement = (ind) => {
     if (cart_arr[ind] >= 1) {
-      setTotal((prevTotal) => prevTotal - products[ind].price);
+      setTotal((prevTotal) => prevTotal - products[ind]?.price);
       setCart_arr((prevArr) => {
         const newArr = [...prevArr];
         newArr[ind] = newArr[ind] - 1;
@@ -62,8 +61,8 @@ const Cart = () => {
   };
 
   const proceed = () => {
-      navigate("/address");
-  }
+    navigate("/address");
+  };
 
   return (
     <>
@@ -95,14 +94,15 @@ const Cart = () => {
                       <div className="cart-cards">
                         <div className="imager">
                           <img
-                            src={ele.image}
+                            src={ele?.image}
                             style={{ width: "60%", height: "70%" }}
+                            alt="prod_img"
                           />
                         </div>
                         <div className="detailer">
-                          <p>{ele.name}</p>
-                          <p>{ele.quantity}</p>
-                          <h4>₹{ele.price}</h4>
+                          <p>{ele?.name}</p>
+                          <p>{ele?.quantity}</p>
+                          <h4>₹{ele?.price}</h4>
                         </div>
                         <div className="handler">
                           <div className="cart-handler">
@@ -139,10 +139,11 @@ const Cart = () => {
                     cursor: "pointer",
                     border: "none",
                     fontFamily: "'Poppins','sans-serif'",
-                    background:"none",
+                    background: "none",
                     color: "white",
-                    fontSize: "1vw"
-                  }} onClick={()=>proceed()}
+                    fontSize: "1vw",
+                  }}
+                  onClick={() => proceed()}
                 >
                   Proceed <FontAwesomeIcon icon={faGreaterThan} />
                 </button>

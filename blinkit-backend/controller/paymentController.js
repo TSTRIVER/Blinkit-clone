@@ -8,7 +8,7 @@ export const checkout = async (req, res, next) => {
     currency: "INR",
   };
   const order = await instance.orders.create(options);
-  console.log(order);
+  // console.log(order);
 
   res.status(201).json({
     success: true,
@@ -31,7 +31,7 @@ export const paymentVerification = async (req, res, next) => {
       razorpay_payment_id,
       razorpay_signature,
       amount_paid,
-      deliver_to:deliver_obj,
+      deliver_to: deliver_obj,
     });
     await find_user.save();
   } else {
@@ -43,7 +43,7 @@ export const paymentVerification = async (req, res, next) => {
           razorpay_payment_id,
           razorpay_signature,
           amount_paid,
-          deliver_to:deliver_obj,
+          deliver_to: deliver_obj,
         },
       ],
     });
@@ -54,8 +54,8 @@ export const paymentVerification = async (req, res, next) => {
     .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
     .update(body.toString())
     .digest("hex");
-  console.log("sig received ", razorpay_signature);
-  console.log("sig generated ", expectedSignature);
+  // console.log("sig received ", razorpay_signature);
+  // console.log("sig generated ", expectedSignature);
 
   const isAuthentic = expectedSignature === razorpay_signature;
 
@@ -70,41 +70,43 @@ export const paymentVerification = async (req, res, next) => {
   }
 };
 
-export const fetchOrders = async(req,res,next) => {
-      const user = await Order.findOne({user_id:req.params.id});
-      let orders_arr = [];
+export const fetchOrders = async (req, res, next) => {
+  const user = await Order.findOne({ user_id: req.params.id });
+  let orders_arr = [];
 
-      if(user){
-        orders_arr = user.orders;
-        res.status(201).json({
-          success:true,
-          orders_arr
-        })
-      }
-      else{
-        res.status(201).json({
-           success: true,
-           orders_arr
-        })
-      }
-}
+  if (user) {
+    orders_arr = user.orders;
+    res.status(201).json({
+      success: true,
+      orders_arr,
+    });
+  } else {
+    res.status(201).json({
+      success: true,
+      orders_arr,
+    });
+  }
+};
 
-export const updateStatus = async(req,res,next) => {
-    const {user_id,order_id,status} = req.body;
+export const updateStatus = async (req, res, next) => {
+  const { user_id, order_id, status } = req.body;
 
-    let order = await Order.findOneAndUpdate({
-      user_id:user_id, "orders.razorpay_order_id":order_id
-    },{
-      $set:{
-        "orders.$.status":status
-      }
+  let order = await Order.findOneAndUpdate(
+    {
+      user_id: user_id,
+      "orders.razorpay_order_id": order_id,
+    },
+    {
+      $set: {
+        "orders.$.status": status,
+      },
     },
     { new: true, runValidators: true, usefindandModify: false }
-    );
+  );
 
-    res.json({
-      success: true,
-      message: "Order Updated Successfully",
-      order
-    })
+  res.json({
+    success: true,
+    message: "Order Updated Successfully",
+    order,
+  });
 };

@@ -1,13 +1,11 @@
 import React from "react";
 import "./navbar.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import "../LoginSignup/myform.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { login, logout, register, login_success } from "../../Store/user_slice";
+import { useDispatch } from "react-redux";
+import { login, logout, register} from "../../Store/user_slice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -19,7 +17,6 @@ const RegLogin = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [logstate, setLogstate] = useState("Login");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("user_token");
