@@ -1,5 +1,7 @@
-import React,{useState,useEffect} from "react";
-import { useSelector,useDispatch} from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 import "../rows.css";
 
 const Row2 = () => {
@@ -46,7 +48,12 @@ const Row2 = () => {
           index <= 16 && (
             <div className="products">
               <img src={cont.image} />
-              <p className="pstyle">Time</p>
+              <p className="pstyle">
+                <FontAwesomeIcon
+                  icon={faClock}
+                  style={{ fontSize: "1vw", color: "green" }}
+                />
+              </p>
               <h3 className="h3style">{cont.name}</h3>
               <p className="pstyle">{cont.quantity}</p>
               <div

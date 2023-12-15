@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../Http/index";
 
 const user_slice = createSlice({
   name: "user",
@@ -36,7 +36,7 @@ const user_slice = createSlice({
 
 export const login = (number,password) =>async(dispatch)=>{
     try{
-     const {data} = await axios.post(`/api/v1/login`,{number,password});
+     const {data} = await api.post(`/api/v1/login`,{number,password});
  
      dispatch(login_success(data.new_user));
      saveToken(data.token,data.new_user);
@@ -48,7 +48,7 @@ export const login = (number,password) =>async(dispatch)=>{
 
  export const register = (name,number,password) => async(dispatch) => {
        try{
-           const {data} = await axios.post(`/api/v1/register`,{name,number,password});
+           const {data} = api.post(`/api/v1/register`,{name,number,password});
            dispatch(register_success(data.new_user));
            saveToken(data.token,data.new_user);
        }
@@ -59,7 +59,7 @@ export const login = (number,password) =>async(dispatch)=>{
 
  export const logout = () => async(dispatch) => {
        try{
-           await axios.get(`/api/v1/logout`);
+           await api.get(`/api/v1/logout`);
            dispatch(logout_success());
        }
        catch(error){
@@ -68,7 +68,7 @@ export const login = (number,password) =>async(dispatch)=>{
 
  export const fetchUsers = () => async(dispatch) => {
      try{
-        const {data} = await axios.get("/api/v1/fetchUsers");
+        const {data} = await api.get("/api/v1/fetchUsers");
         dispatch(fetch_users(data.all_users))
      }
      catch(error){
