@@ -12,9 +12,7 @@ export const instance = new Razorpay({
 
 // connectDB();
 
-mongoose.connect(
-  "mongodb+srv://mohammadtaahawebservices:gGETnjpXTTA8JDBr@aurallink-cluster.55wqsrs.mongodb.net/?retryWrites=true&w=majority"
-);
+mongoose.connect(process.env.MONGO_CONNECT);
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening to the port number ${process.env.PORT}`);
