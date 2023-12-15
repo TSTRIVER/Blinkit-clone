@@ -9,6 +9,11 @@ import paymentRouter from "./routes/paymentRoute.js";
 import cors from "cors";
 export const app = express();
 
+const corsOption = {
+  credentials: true,
+  origin: ["*"],
+};
+
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(fileupload());
 
@@ -16,13 +21,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOption));
 
-app.use("/api/v1",router);
-app.use("/api/v1",productRouter);
-app.use("/api/v1",addressRouter);
-app.use("/api/v1",paymentRouter);
+app.use("/api/v1", router);
+app.use("/api/v1", productRouter);
+app.use("/api/v1", addressRouter);
+app.use("/api/v1", paymentRouter);
 
-app.get("/api/v1/getkey",(req,res)=>res.status(201).json({
-    key: process.env.RAZORPAY_API_KEY
-}))
+app.get("/api/v1/getkey", (req, res) =>
+  res.status(201).json({
+    key: process.env.RAZORPAY_API_KEY,
+  })
+);
