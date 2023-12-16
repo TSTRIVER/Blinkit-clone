@@ -10,10 +10,12 @@ export const instance = new Razorpay({
   key_secret: process.env.RAZORPAY_API_SECRET,
 });
 
+const PORT = process.env.PORT || 4000;
+
 // connectDB();
 
 mongoose.connect(process.env.MONGO_CONNECT);
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log(`Listening to the port number ${process.env.PORT}`);
 });

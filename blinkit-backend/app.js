@@ -10,10 +10,13 @@ import cors from "cors";
 export const app = express();
 
 const corsOption = {
+  origin: "https://master--bespoke-cat-718b47.netlify.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
-  origin: ["*"],
+  optionsSuccessStatus: 204,
 };
 
+app.use(cors(corsOption));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(fileupload());
 
@@ -21,7 +24,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors(corsOption));
 
 app.use("/api/v1", router);
 app.use("/api/v1", productRouter);
