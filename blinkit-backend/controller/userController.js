@@ -7,7 +7,7 @@ export const registerUser = async (req, res, next) => {
   const { name, number, password } = req.body;
   let new_user = await User.findOne({ number: number });
   if (new_user) {
-    return res.json({ err: true });
+    return res.status(401).json({ success: false, err: true });
   }
   const hashedPassword = await bcrypt.hash(password, 10);
   new_user = await User.create({
@@ -41,11 +41,11 @@ export const logoutUser = async (req, res, next) => {
   });
 };
 
-export const fetchUsers = async(req,res,next) => {
-   const all_users = await User.find();
+export const fetchUsers = async (req, res, next) => {
+  const all_users = await User.find();
 
-   res.status(201).json({
-      success:true,
-      all_users
-   })
-}
+  res.status(201).json({
+    success: true,
+    all_users,
+  });
+};

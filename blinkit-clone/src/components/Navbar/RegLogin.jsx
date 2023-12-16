@@ -5,7 +5,7 @@ import "../LoginSignup/myform.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
-import { login, logout, register} from "../../Store/user_slice";
+import { login, logout, register } from "../../Store/user_slice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -81,17 +81,30 @@ const RegLogin = () => {
         theme: "light",
       });
     } else {
-      dispatch(register(name, phoneNumber, password));
-      toast.success("User Registered Successfully!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      const resp = await dispatch(register(name, phoneNumber, password));
+      if (!resp) {
+        toast.error("User Already Exists!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        toast.success("User Registered Successfully!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     }
     closePopup();
     setName("");
@@ -163,119 +176,129 @@ const RegLogin = () => {
         )}
       </div>
       {logstate === "Logout" ? (
-          <button className="btn-login" onClick={() => logoutHandle()} style={{fontSize:"xx-large",marginRight:"1vw"}}><FontAwesomeIcon icon={faCircleUser} className="face-icon" /></button>
-        ) : (
-          <button className="btn-login" onClick={() => setIsPopupOpen(true)} style={{fontSize:"xx-large",marginRight:"1vw"}}><FontAwesomeIcon icon={faCircleUser} className="face-icon" /></button>
-        )}
-         {isPopupOpen && (
-          <div className="overlay">
-            <div className="popup">
-              <button
-                onClick={() => btn1handle()}
-                className={
-                  activeBtn1 ? "firstButton btn-active" : "firstButton"
-                }
-              >
-                Login
-              </button>
-              <button
-                onClick={() => btn2handle()}
-                className={
-                  activeBtn2 ? "secondButton btn-active" : "secondButton"
-                }
-              >
-                Sign Up
-              </button>
+        <button
+          className="btn-login"
+          onClick={() => logoutHandle()}
+          style={{ fontSize: "xx-large", marginRight: "1vw" }}
+        >
+          <FontAwesomeIcon icon={faCircleUser} className="face-icon" />
+        </button>
+      ) : (
+        <button
+          className="btn-login"
+          onClick={() => setIsPopupOpen(true)}
+          style={{ fontSize: "xx-large", marginRight: "1vw" }}
+        >
+          <FontAwesomeIcon icon={faCircleUser} className="face-icon" />
+        </button>
+      )}
+      {isPopupOpen && (
+        <div className="overlay">
+          <div className="popup">
+            <button
+              onClick={() => btn1handle()}
+              className={activeBtn1 ? "firstButton btn-active" : "firstButton"}
+            >
+              Login
+            </button>
+            <button
+              onClick={() => btn2handle()}
+              className={
+                activeBtn2 ? "secondButton btn-active" : "secondButton"
+              }
+            >
+              Sign Up
+            </button>
 
-              <button onClick={closePopup} className="closeButton">
-                X
-              </button>
-              {activeBtn1 ? (
-                <form onSubmit={handleSubmit1}>
-                  <label htmlFor="phoneNumber">Phone Number:</label>
-                  <input
-                    type="text"
-                    id="phoneNumber"
-                    value={phoneNumber}
-                    onChange={handlePhoneNumberChange}
-                    className="inputField"
-                    name="number"
-                  />
+            <button onClick={closePopup} className="closeButton">
+              X
+            </button>
+            {activeBtn1 ? (
+              <form onSubmit={handleSubmit1}>
+                <label htmlFor="phoneNumber">Phone Number:</label>
+                <input
+                  type="text"
+                  id="phoneNumber"
+                  value={phoneNumber}
+                  onChange={handlePhoneNumberChange}
+                  className="inputField"
+                  name="number"
+                />
 
-                  <label htmlFor="password">Password:</label>
-                  <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="inputField"
-                    name="password"
-                  />
+                <label htmlFor="password">Password:</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="inputField"
+                  name="password"
+                />
 
-                  <label htmlFor="confirmPassword">Confirm Password:</label>
-                  <input
-                    type="password"
-                    id="confirmPassword"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="inputField"
-                    name="cnfpassword"
-                  />
+                <label htmlFor="confirmPassword">Confirm Password:</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="inputField"
+                  name="cnfpassword"
+                />
 
-                  <button type="submit" className="submitButton">
-                    Submit
-                  </button>
-                </form>
-              ) : (
-                <form onSubmit={handleSubmit2}>
-                  <label htmlFor="name">Name:</label>
-                  <input
-                    type="text"
-                    id="phoneNumber"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="inputField"
-                    name="name"
-                  />
+                <button type="submit" className="submitButton">
+                  Submit
+                </button>
+              </form>
+            ) : (
+              <form onSubmit={handleSubmit2}>
+                <label htmlFor="name">Name:</label>
+                <input
+                  type="text"
+                  id="phoneNumber"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="inputField"
+                  name="name"
+                />
 
-                  <label htmlFor="phoneNumber">Phone Number:</label>
-                  <input
-                    type="text"
-                    id="phoneNumber"
-                    value={phoneNumber}
-                    onChange={handlePhoneNumberChange}
-                    className="inputField"
-                    name="number"
-                  />
+                <label htmlFor="phoneNumber">Phone Number:</label>
+                <input
+                  type="text"
+                  id="phoneNumber"
+                  value={phoneNumber}
+                  onChange={handlePhoneNumberChange}
+                  className="inputField"
+                  name="number"
+                />
 
-                  <label htmlFor="password">Password:</label>
-                  <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="inputField"
-                    name="password"
-                  />
+                <label htmlFor="password">Password:</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="inputField"
+                  name="password"
+                />
 
-                  <label htmlFor="confirmPassword">Confirm Password:</label>
-                  <input
-                    type="password"
-                    id="confirmPassword"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="inputField"
-                    name="cnfpassword"
-                  />
+                <label htmlFor="confirmPassword">Confirm Password:</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="inputField"
+                  name="cnfpassword"
+                />
 
-                  <button type="submit" className="submitButton">
-                    Submit
-                  </button>
-                </form>
-              )}
-            </div>
+                <button type="submit" className="submitButton">
+                  Submit
+                </button>
+              </form>
+            )}
           </div>
-        )}
+        </div>
+      )}
     </>
   );
 };
