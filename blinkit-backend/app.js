@@ -10,7 +10,7 @@ import cors from "cors";
 export const app = express();
 
 const corsOption = {
-  origin: "https://master--bespoke-cat-718b47.netlify.app",
+  origin: "https://blinkitc.netlify.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
